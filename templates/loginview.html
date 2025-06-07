@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{%block title %} Login page {%endblock%}
+{% block content %}
+
+<div class="flex justify-center items-center w-full">
+    <form method="post" enctype="multipart/form-data" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-xl">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="mb-5">
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                {{ field.label }}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+            <p class="text-red-500 text-xs mt-1">
+                {{ field.errors.as_text }}
+            </p>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="flex justify-center">
+            <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow">
+                Login
+            </button>
+        </div>
+
+      <div class="my-5 w-full">
+            <a href="#"
+                class="flex items-center justify-center gap-3 w-full px-4 py-2 border border-gray-300 rounded-lg shadow hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer">
+                <img src="{% static 'icons/icons8-google.svg' %}" class="w-6 h-6" alt="Google Icon" />
+                <span class="text-gray-700 font-medium">Login with Google</span>
+            </a>
+        </div>
+
+        <div class="flex justify-between mt-3">
+            <p>
+                Don't have an account?
+                <span>
+                    <a href="{% url 'signup_url' %}" class="text-blue-500 underline hover:text-blue-700">
+                        Sign up
+                    </a>
+                </span>
+            </p>
+            <p>
+                Forgot Password?
+                <span>
+                    <a href="{% url 'forgotpsw_url' %}" class="text-blue-500 underline hover:text-blue-700">
+                        Click me
+                    </a>
+                </span>
+            </p>
+        </div>
+
+    </form>
+
+
+</div>
+
+
+{% endblock %}
