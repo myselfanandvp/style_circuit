@@ -41,7 +41,7 @@
 | Layer        | Technology           |
 | ------------ | -------------------- |
 | Backend      | Django, Python       |
-| Frontend     | HTML5, Tailwind CSS  |
+| Frontend     | HTML5, Tailwind CSS (node should be installed on your system)|
 | Database     | PostgreSQL           |
 | Auth         | Django Auth System   |
 | Deployment   | Render / Railway / Vercel (planned) |
@@ -63,3 +63,10 @@ stylecircuit/
 ├── media/                # Uploaded files (profile images, etc.)
 ├── stylecircuit/         # Project settings, URLs
 └── manage.py
+
+```bash
+git clone https://github.com/yourusername/stylecircuit.git
+cd stylecircuit
+pip install -r requirements.txt
+python manage.py tailwind start
+python manage.py runserver
