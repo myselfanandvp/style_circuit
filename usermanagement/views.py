@@ -4,7 +4,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
-from .forms import SignupForm, LoginForm,ForgotpswForm,OtpForm
+from django.http import HttpResponse
+from .forms import SignupForm, LoginForm,ForgotpswForm,OtpForm,RestPasswordForm
+
 
 
 # Create your views here.
@@ -76,3 +78,22 @@ class VerifyOtp(View):
     def get(self,request):
         form=OtpForm()
         return render(request,'verifyotp.html',{'form':form})
+    
+    def post(self,request):
+        form= OtpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Worked")
+        return  HttpResponse("Hello world")
+    
+    
+class ResetPasswordView(View):
+    def get(self,request):
+        form=RestPasswordForm()
+        return render(request,'resetpassword.html',{'form':form})
+    
+    
+    def post(self,request):
+        form=RestPasswordForm(request.POST)
+        if form.is_valid():
+            return HttpResponse("worked")
