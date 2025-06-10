@@ -2,35 +2,46 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% tailwind_css %}
 
-    <title>{% block title %} Index {%endblock%}</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% tailwind_css %}
 
-  <style>
-    /* Chrome, Safari, Edge, Opera */
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+  <title>{% block title %} Index {%endblock%}</title>
+</head>
 
-    /* Firefox */
-    input[type="number"] {
-      -moz-appearance: textfield;
-    }
-  </style>
+<style>
+  /* Chrome, Safari, Edge, Opera */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-  <body>
-    {%include 'navbar.html'%}
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
 
-    <div class="flex justify-center items-center min-h-screen py-10">
-      {% block content %} {% endblock %}
-    </div>
+<body class="flex flex-col min-h-screen">
 
-    {%include 'footer.html'%}
-  </body>
+
+  {%include 'navbar.html'%}
+
+
+
+  <main class="flex-grow flex items-center justify-center my-3">
+
+    {% block content %} {% endblock %}
+  </main>
+
+
+
+  {%include 'footer.html'%}
+  </div>
+
+</body>
+
 </html>
