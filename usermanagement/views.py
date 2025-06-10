@@ -5,34 +5,48 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.http import HttpResponse
-from .forms import SignupForm, LoginForm,ForgotpswForm,OtpForm,RestPasswordForm
-
+from .forms import SignupForm, LoginForm, ForgotpswForm, OtpForm, RestPasswordForm
 
 
 # Create your views here.
+
+
+def reroute(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return redirect('admin_home_url')
+        else:
+            return redirect('home_url')
+    return None
+
 
 @method_decorator(never_cache, name='dispatch')
 class SignupView(View):
 
     def get(self, request):
+        redirect_response = reroute(request)
+        if redirect_response:
+            return redirect_response
         form = SignupForm()
-        return render(request, 'signupview.html', {'form': form})
+        return render(request, 'signup.html', {'form': form})
 
     def post(self, request):
-        newuser = SignupForm(request.POST, request.FILES)
-        if newuser.is_valid():
-            newuser.save()
+        form = SignupForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
             return redirect("login_url")
         else:
-            return render(request, 'signupview.html', {'form': newuser})
+            return render(request, 'signup.html', {'form': form})
 
 
 @method_decorator(never_cache, name='dispatch')
 class LoginView(View):
-
     def get(self, request):
+        redirect_response = reroute(request)
+        if redirect_response:
+            return redirect_response
         form = LoginForm()
-        return render(request, 'loginview.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -43,13 +57,18 @@ class LoginView(View):
                 password=form.cleaned_data['password']
             )
             if user is not None:
-                login(request, user)
-                return redirect("home_url")
+                if user.is_superuser:
+                    login(request, user)
+                    return redirect("admin_home_url")
+                else:
+                    login(request, user)
+                    return redirect("home_url")
+
             else:
                 # Valid form, but invalid credentials
                 form.add_error(None, "Invalid email or password.")
         # Either form was invalid, or user auth failed
-        return render(request, 'loginview.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
 
 @method_decorator(never_cache, name='dispatch')
@@ -58,9 +77,10 @@ class HomeView(LoginRequiredMixin, View):
     login_url = 'login_url'
 
     def get(self, request):
-        return render(request, 'homeview.html', {})
+        return render(request, 'home.html', {})
 
 
+@method_decorator(never_cache, name='dispatch')
 class LogoutView(LoginRequiredMixin, View):
     login_url = 'login_url'
 
@@ -71,29 +91,50 @@ class LogoutView(LoginRequiredMixin, View):
 
 class ForgotPasswordView(View):
     def get(self, request):
+        redirect_response = reroute(request)
+        if redirect_response:
+            return redirect_response
         form = ForgotpswForm()
-        return render(request, 'forgotpassword.html', {'form':form})
-    
+        return render(request, 'forgotpassword.html', {'form': form})
+
+
 class VerifyOtp(View):
-    def get(self,request):
-        form=OtpForm()
-        return render(request,'verifyotp.html',{'form':form})
-    
-    def post(self,request):
-        form= OtpForm(request.POST)
+    def get(self, request):
+        redirect_response = reroute(request)
+        if redirect_response:
+            return redirect_response
+        form = OtpForm()
+        return render(request, 'verifyotp.html', {'form': form})
+
+    def post(self, request):
+        form = OtpForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("Worked")
-        return  HttpResponse("Hello world")
-    
-    
+            return HttpResponse("Done")
+
+        return HttpResponse("Failed")
+
+
 class ResetPasswordView(View):
-    def get(self,request):
-        form=RestPasswordForm()
-        return render(request,'resetpassword.html',{'form':form})
-    
-    
-    def post(self,request):
-        form=RestPasswordForm(request.POST)
+    def get(self, request):
+        redirect_response = reroute(request)
+        if redirect_response:
+            return redirect_response
+        form = RestPasswordForm()
+        return render(request, 'resetpassword.html', {'form': form})
+
+    def post(self, request):
+        form = RestPasswordForm(request.POST)
         if form.is_valid():
             return HttpResponse("worked")
+        
+        
+        
+class AboutView(View):
+    def get(self,request):
+        return render(request,'about.html',{})
+
+
+class ContactView(View):
+    def get (self,request):
+        return render(request,'contact.html',{})

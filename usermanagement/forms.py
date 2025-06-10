@@ -17,7 +17,7 @@ class SignupForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(
         attrs=input_field_style), label="Password")
     profile_img = forms.ImageField(widget=forms.ClearableFileInput(
-        attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer'}), label='Profile Image')
+        attrs={'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer'}), label='Profile Image',required=False)
 
     class Meta:
         model = CustomUser
@@ -56,7 +56,7 @@ class OtpForm(forms.Form):
         attrs={'class': 'shadow appearance-none border-solid  outline-3 outline-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight  focus:outline-gray-400 focus:shadow mb-2'}), label="OTP:", required=True)
 
     def save(self):
-        print("Hello world")
+       return 'saved'
 
 
 class RestPasswordForm(forms.Form):

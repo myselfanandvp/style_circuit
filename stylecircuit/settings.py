@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'usermanagement',
+    'admin_panel.apps.AdminPanelConfig',
 ]
 TAILWIND_APP_NAME = 'theme'
 AUTH_USER_MODEL = 'usermanagement.CustomUser'
