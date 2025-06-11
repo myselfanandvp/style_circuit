@@ -10,7 +10,6 @@ from .forms import SignupForm, LoginForm, ForgotpswForm, OtpForm, RestPasswordFo
 
 # Create your views here.
 
-
 def reroute(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
@@ -18,6 +17,7 @@ def reroute(request):
         else:
             return redirect('home_url')
     return None
+
 
 
 @method_decorator(never_cache, name='dispatch')
@@ -138,3 +138,4 @@ class AboutView(View):
 class ContactView(View):
     def get (self,request):
         return render(request,'contact.html',{})
+    
