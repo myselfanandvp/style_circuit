@@ -19,7 +19,6 @@ def reroute(request):
     return None
 
 
-
 @method_decorator(never_cache, name='dispatch')
 class SignupView(View):
 
@@ -127,15 +126,13 @@ class ResetPasswordView(View):
         form = RestPasswordForm(request.POST)
         if form.is_valid():
             return HttpResponse('worked')
-        
-        
-        
+
+
 class AboutView(View):
-    def get(self,request):
-        return render(request,'about.html',{})
+    def get(self, request):
+        return render(request, 'about.html', {})
 
 
 class ContactView(View):
-    def get (self,request):
-        return render(request,'contact.html',{})
-    
+    def get(self, request):
+        return render(request, 'contact.html', {})

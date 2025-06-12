@@ -23,8 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--&3&ylu99imomk8+i@dtl10so==&vt2x)=yeq7$2iy7%3dpg+%'
-
+SECRET_KEY =env("django_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'stylecircuit.middleware.FindLoadingTime',
     
 ]
 
