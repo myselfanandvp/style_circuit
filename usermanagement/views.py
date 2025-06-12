@@ -126,7 +126,7 @@ class ResetPasswordView(View):
     def post(self, request):
         form = RestPasswordForm(request.POST)
         if form.is_valid():
-            return HttpResponse("worked")
+            return HttpResponse('worked')
         
         
         
