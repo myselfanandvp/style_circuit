@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'stylecircuit.middleware.Custom404Middleware',    
 ]
 
-SESSION_EXPIRE_SECONDS = 120
+#SESSION_EXPIRE_SECONDS = 120
 
 SESSION_TIMEOUT_REDIRECT = 'login_url'
 

@@ -4,8 +4,8 @@
 {%block title %} Login page {%endblock%}
 {% block content %}
 
-<div class="flex justify-center items-center w-full my-14">
-    <form method="post" enctype="multipart/form-data" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-xl">
+<div class="flex justify-center items-center w-full  p-4 lg:py-16 bg-[url(https://i.redd.it/new-and-slightly-older-discord-login-screen-as-a-png-v0-zznw60dgve3d1.png?width=1600&format=png&auto=webp&s=8c9aac38a07b339966ff21fb76e12ef551d6a9c2)] bg-no-repeat bg-center bg-cover">
+    <form method="post" enctype="multipart/form-data" class="w-full max-w-lg bg-gray-200 p-6 rounded-lg  shadow-xl/50">
         {% csrf_token %}
 
         {% for field in form %}
