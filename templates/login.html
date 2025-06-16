@@ -5,12 +5,12 @@
 {% block content %}
 
 <div class="flex justify-center items-center w-full  p-4 lg:py-16 bg-[url(https://i.redd.it/new-and-slightly-older-discord-login-screen-as-a-png-v0-zznw60dgve3d1.png?width=1600&format=png&auto=webp&s=8c9aac38a07b339966ff21fb76e12ef551d6a9c2)] bg-no-repeat bg-center bg-cover">
-    <form method="post" enctype="multipart/form-data" class="w-full max-w-lg bg-gray-200 p-6 rounded-lg  shadow-xl/50">
+    <form method="post" enctype="multipart/form-data" class="w-full max-w-lg bg-gray-200/30 p-6 rounded-lg  shadow-xl/50">
         {% csrf_token %}
 
         {% for field in form %}
         <div class="mb-5">
-            <label class="block text-sm font-medium text-gray-700 mb-1">
+            <label class="block text-sm font-medium text-gray-900 mb-1">
                 {{ field.label }}
             </label>
             {{ field }}
