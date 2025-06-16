@@ -58,11 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'stylecircuit.middleware.FindLoadingTime',
-    
+    'stylecircuit.middleware.Custom404Middleware',    
 ]
 
-SESSION_EXPIRE_SECONDS = 30
+SESSION_EXPIRE_SECONDS = 120
 
 SESSION_TIMEOUT_REDIRECT = 'login_url'
 

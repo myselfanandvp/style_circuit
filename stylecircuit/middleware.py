@@ -1,23 +1,21 @@
-from datetime import datetime
+# middleware.py
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.shortcuts import render,redirect
 
-
-class FindLoadingTime:
-    def __init__(self,get_reponse):
-        self.get_reponse = get_reponse
+class Custom404Middleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
 
     def __call__(self, request):
-        starting_time = datetime.now().timestamp()
+        response = self.get_response(request)
 
-        response = self.get_reponse(request)
+        # Print actual status code
+        #print(f"Middleware Status Code: {response.status_code}")
 
-        if request.POST:
-        	print(request.POST.get('password'))
-
-        ending_time = datetime.now().timestamp()
-
-        loading_time = ending_time - starting_time
-
-        print(f"the total time taken is {loading_time:.2f}")
+        # Custom 404 handling
+        if response.status_code == 404:
+            return redirect('pagenotfound_url')
 
 
         return response

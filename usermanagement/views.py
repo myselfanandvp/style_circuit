@@ -136,3 +136,7 @@ class AboutView(View):
 class ContactView(View):
     def get(self, request):
         return render(request, 'contact.html', {})
+
+class PageNotFound(View):
+    def get(self,request):
+        return render(request,'notfound.html')

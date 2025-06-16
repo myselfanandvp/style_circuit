@@ -39,6 +39,7 @@ class AdminListView(LoginRequiredMixin, UserPassesTestMixin, View):
             return render(request, 'admin_views/listuser.html', {'users': users})
         return render(request, 'admin_views/listuser.html', {'users': []})
 
+  
 
 @method_decorator(never_cache, name='dispatch')
 class AdminEditView(LoginRequiredMixin, UserPassesTestMixin, View):
