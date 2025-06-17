@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import login, authenticate, logout
@@ -73,9 +74,11 @@ class LoginView(View):
 @method_decorator(never_cache, name='dispatch')
 class HomeView(LoginRequiredMixin, View):
 
-    login_url = 'login_url'
-
+    login_url = 'login_url'  
     def get(self, request):
+        if request.user.is_authenticated:
+            if request.user.is_superuser:
+                return redirect('admin_home_url')
         return render(request, 'home.html', {})
 
 
