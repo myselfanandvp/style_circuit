@@ -74,3 +74,4 @@ class AdminDeleteView(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self,request,userid):
         CustomUser.objects.get(id=userid).delete()
         return redirect('admin_list_url')
+
